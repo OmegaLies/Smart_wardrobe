@@ -16,7 +16,7 @@ class SmartWardrobe
     all_of_type(type).select{ |garment| garment.right_temperature?(@temperature) }
   end
 
-  def generate
+  def generate_appearance
     types.map { |type| fits(type).sample }.compact
   end
 end

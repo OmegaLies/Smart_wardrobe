@@ -12,4 +12,4 @@ wardrobe = SmartWardrobe.new(
   temperature: temperature_now
 )
 puts "Предлагаем сегодня надеть:"
-wardrobe.generate.map { |garment| puts garment }
+puts wardrobe.generate_appearance

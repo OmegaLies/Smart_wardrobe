@@ -1,5 +1,5 @@
 module GarmentParser
-  def self.from_txt(file_names)
+  def from_txt(file_names)
     file_names.map do |file_name|
       lines = File.readlines(file_name, chomp: true)
       Garment.new(
@@ -9,4 +9,6 @@ module GarmentParser
       )
     end
   end
+
+  module_function :from_txt
 end
