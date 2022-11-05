@@ -10,12 +10,14 @@ class Garment
     @temperature.include?(temperature)
   end
 
+  def to_s
+    "#{@name} (#{@type}) #{@temperature}"
+  end
+
+  private
+
   def str_to_range(string)
     tmp = string.delete("(").split(", ").map(&:to_i)
     Range.new(tmp[0],tmp[1])
-  end
-
-  def to_s
-    "#{@name} (#{@type}) #{@temperature}"
   end
 end
