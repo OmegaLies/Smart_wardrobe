@@ -4,6 +4,12 @@ class SmartWardrobe
     @temperature = params[:temperature]
   end
 
+  def generate_appearance
+    types.map { |type| fits(type).sample }.compact
+  end
+
+  private
+
   def types
     @garments.map(&:type).uniq
   end
@@ -14,9 +20,5 @@ class SmartWardrobe
 
   def fits(type)
     all_of_type(type).select{ |garment| garment.right_temperature?(@temperature) }
-  end
-
-  def generate_appearance
-    types.map { |type| fits(type).sample }.compact
   end
 end
