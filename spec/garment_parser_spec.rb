@@ -30,4 +30,3 @@ describe GarmentParser do
     end
   end
 end
-
