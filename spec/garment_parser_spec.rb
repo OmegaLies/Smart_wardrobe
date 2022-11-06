@@ -16,7 +16,7 @@ describe GarmentParser do
     ]
   end
 
-  describe ".from_txt" do
+  describe "#from_txt" do
     context "Return Array" do
       it { expect(garments).to be_a Array }
     end

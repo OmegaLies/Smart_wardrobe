@@ -8,7 +8,7 @@ require "smart_wardrobe"
 describe SmartWardrobe do
   let(:file_names) { Dir["#{__dir__}/fixtures/*"] }
 
-  describe ".generate" do
+  describe "#generate" do
     context "Returns right set for temperature (0..10)" do
       let(:result) do
         [
