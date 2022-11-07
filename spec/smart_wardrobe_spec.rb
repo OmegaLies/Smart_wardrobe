@@ -1,6 +1,5 @@
 #encoding: UTF-8
 
-require 'rspec'
 require "garment"
 require "garment_parser"
 require "smart_wardrobe"
