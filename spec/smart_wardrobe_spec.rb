@@ -1,15 +1,15 @@
 #encoding: UTF-8
 
+require 'rspec'
 require "garment"
 require "garment_parser"
 require "smart_wardrobe"
 
 describe SmartWardrobe do
-  let(:file_names) { Dir["#{__dir__}/fixtures/*"] }
+  let(:garments_from_xml) { GarmentParser.from_txt(Dir["#{__dir__}/fixtures/*"]) }
 
   describe "#generate" do
     context "given input with one right set" do
-      let(:garments) { GarmentParser.from_txt(file_names) }
       let(:result) do
         [
           "Кроссовки (Обувь) 0..25",
@@ -21,7 +21,7 @@ describe SmartWardrobe do
       it "Returns right set for temperature (0..10)" do
         0.upto 10 do |test_temperature|
           wardrobe = SmartWardrobe.new(
-            garments: GarmentParser.from_txt(file_names),
+            garments: garments_from_xml,
             temperature: test_temperature
           )
           expect(wardrobe.generate_appearance.map(&:to_s)).to eq result
@@ -35,7 +35,7 @@ describe SmartWardrobe do
       it "Returns one of two possible options" do
         20.upto 25 do |test_temperature|
           wardrobe = SmartWardrobe.new(
-            garments: GarmentParser.from_txt(file_names),
+            garments: garments_from_xml,
             temperature: test_temperature
           )
           expect(results).to include wardrobe.generate_appearance[0].to_s
