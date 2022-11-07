@@ -1,43 +1,43 @@
 #encoding: UTF-8
 
-require "rspec"
 require "garment"
 
 describe Garment do
-  let(:garment) { Garment.new(name: "Пальто", type: "Верхняя одежда", temperature: "(-5, 10)") }
+  let(:garment) { Garment.new(name: "Пальто", type: "Верхняя одежда", temperature: (-5..10)) }
 
-  describe "#name" do
-    it "Returns name" do
-      expect(garment.name).to eq "Пальто"
+  describe ".initialize" do
+    let(:expected_attributes) do
+      {
+        name: "Пальто",
+        type: "Верхняя одежда",
+        temperature: (-5..10)
+      }
     end
-  end
 
-  describe "#type" do
-    it "Returns type" do
-      expect(garment.type).to eq "Верхняя одежда"
-    end
-  end
-
-  describe "#temperature" do
-    it "Returns temperature" do
-      expect(garment.temperature).to eq -5..10
+    it 'assign correct attributes' do
+      expect(garment).to have_attributes(expected_attributes)
     end
   end
 
   describe "#right_temperature?" do
     context "given valid temperature" do
+      let(:temperature) { 0 }
+
       it "right_temperature? returns true" do
-        [-5, -3, 0, 2, 7, 10].each { |temperature| expect(garment.right_temperature?(temperature)).to eq true }
+        expect(garment.right_temperature?(temperature)).to eq true
       end
     end
+
     context "given invalid temperature" do
+      let(:temperature) { -10 }
+
       it "right_temperature? returns false" do
-        [-20, -10, -6, 11, 15, 20].each { |temperature| expect(garment.right_temperature?(temperature)).to eq false }
+        expect(garment.right_temperature?(temperature)).to eq false
       end
     end
   end
 
-  describe "#right_temperature?" do
+  describe "#fill_info" do
     it "Returns full info" do
       expect(garment.to_s).to eq "Пальто (Верхняя одежда) -5..10"
     end

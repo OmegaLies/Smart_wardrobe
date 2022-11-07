@@ -1,6 +1,5 @@
 #encoding: UTF-8
 
-require "rspec"
 require "garment"
 require "garment_parser"
 require "smart_wardrobe"
@@ -9,7 +8,8 @@ describe SmartWardrobe do
   let(:file_names) { Dir["#{__dir__}/fixtures/*"] }
 
   describe "#generate" do
-    context "Returns right set for temperature (0..10)" do
+    context "given input with one right set" do
+      let(:garments) { GarmentParser.from_txt(file_names) }
       let(:result) do
         [
           "Кроссовки (Обувь) 0..25",
@@ -18,8 +18,8 @@ describe SmartWardrobe do
         ]
       end
 
-      it do
-        (0..10).each do |test_temperature|
+      it "Returns right set for temperature (0..10)" do
+        0.upto 10 do |test_temperature|
           wardrobe = SmartWardrobe.new(
             garments: GarmentParser.from_txt(file_names),
             temperature: test_temperature
@@ -29,11 +29,11 @@ describe SmartWardrobe do
       end
     end
 
-    context "Returns one of two possible options" do
+    context "given input with more then one right set " do
       let(:results) { ["Кроссовки (Обувь) 0..25", "Шлепанцы (Обувь) 20..40"] }
 
-      it do
-        (20..25).each do |test_temperature|
+      it "Returns one of two possible options" do
+        20.upto 25 do |test_temperature|
           wardrobe = SmartWardrobe.new(
             garments: GarmentParser.from_txt(file_names),
             temperature: test_temperature

@@ -5,7 +5,7 @@ class SmartWardrobe
   end
 
   def generate_appearance
-    types.map { |type| fits(type).sample }.compact
+    types.filter_map { |type| fits(type).sample }
   end
 
   private
