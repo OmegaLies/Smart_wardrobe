@@ -1,13 +1,23 @@
 #encoding: UTF-8
 
+require 'rspec'
 require "garment"
-require "garment_parser"
 require "smart_wardrobe"
 
 describe SmartWardrobe do
-  let(:garments_from_xml) { GarmentParser.from_txt(Dir["#{__dir__}/fixtures/*"]) }
+  let(:wardrobe) do
+    SmartWardrobe.new(
+      garments: [
+        Garment.new(name: "Шапка-ушанка", type: "Головной убор", temperature: -20..-5),
+        Garment.new(name: "Шлепанцы", type: "Обувь", temperature: 20..40),
+        Garment.new(name: "Кроссовки", type: "Обувь", temperature: 0..25),
+        Garment.new(name: "Джинсы", type: "Штаны", temperature: -5..+15),
+        Garment.new(name: "Пальто", type: "Верхняя одежда", temperature: -5..+10)
+      ]
+    )
+  end
 
-  describe "#generate" do
+  describe "#generate_appearance" do
     context "given input with one right set" do
       let(:result) do
         [
@@ -19,11 +29,7 @@ describe SmartWardrobe do
 
       it "Returns right set for temperature (0..10)" do
         0.upto 10 do |test_temperature|
-          wardrobe = SmartWardrobe.new(
-            garments: garments_from_xml,
-            temperature: test_temperature
-          )
-          expect(wardrobe.generate_appearance.map(&:to_s)).to eq result
+          expect(wardrobe.generate_appearance(test_temperature).map(&:to_s)).to eq result
         end
       end
     end
@@ -33,11 +39,7 @@ describe SmartWardrobe do
 
       it "Returns one of two possible options" do
         20.upto 25 do |test_temperature|
-          wardrobe = SmartWardrobe.new(
-            garments: garments_from_xml,
-            temperature: test_temperature
-          )
-          expect(results).to include wardrobe.generate_appearance[0].to_s
+          expect(results).to include wardrobe.generate_appearance(test_temperature)[0].to_s
         end
       end
     end

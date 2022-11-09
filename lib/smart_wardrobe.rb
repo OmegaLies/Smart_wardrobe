@@ -1,11 +1,10 @@
 class SmartWardrobe
-  def initialize(params)
-    @garments = params[:garments]
-    @temperature = params[:temperature]
+  def initialize(args)
+    @garments = args[:garments]
   end
 
-  def generate_appearance
-    types.filter_map { |type| fits(type).sample }
+  def generate_appearance(temperature)
+    types.filter_map { |type| fits(type, temperature).sample }
   end
 
   private
@@ -18,7 +17,7 @@ class SmartWardrobe
     @garments.select { |garment| garment.type == type }
   end
 
-  def fits(type)
-    all_of_type(type).select{ |garment| garment.right_temperature?(@temperature) }
+  def fits(type, temperature)
+    all_of_type(type).select{ |garment| garment.right_temperature?(temperature) }
   end
 end

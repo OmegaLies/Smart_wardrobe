@@ -1,10 +1,10 @@
 class Garment
   attr_reader :name, :type, :temperature
 
-  def initialize(params)
-    @name = params[:name]
-    @type = params[:type]
-    @temperature = params[:temperature]
+  def initialize(args)
+    @name = args[:name]
+    @type = args[:type]
+    @temperature = args[:temperature]
   end
 
   def right_temperature?(temperature)

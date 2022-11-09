@@ -5,7 +5,7 @@ require "garment"
 describe Garment do
   let(:garment) { Garment.new(name: "Пальто", type: "Верхняя одежда", temperature: (-5..10)) }
 
-  describe ".initialize" do
+  describe "#initialize" do
     let(:expected_attributes) do
       {
         name: "Пальто",
@@ -24,7 +24,7 @@ describe Garment do
       let(:temperature) { 0 }
 
       it "right_temperature? returns true" do
-        expect(garment.right_temperature?(temperature)).to eq true
+        expect(garment.right_temperature?(temperature)).to be true
       end
     end
 
@@ -32,12 +32,12 @@ describe Garment do
       let(:temperature) { -10 }
 
       it "right_temperature? returns false" do
-        expect(garment.right_temperature?(temperature)).to eq false
+        expect(garment.right_temperature?(temperature)).to be false
       end
     end
   end
 
-  describe "#fill_info" do
+  describe "#full_info" do
     it "Returns full info" do
       expect(garment.to_s).to eq "Пальто (Верхняя одежда) -5..10"
     end
