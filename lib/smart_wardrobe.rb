@@ -7,6 +7,10 @@ class SmartWardrobe
     types.filter_map { |type| fits(type, temperature).sample }
   end
 
+  def empty?
+    @garments.empty?
+  end
+
   private
 
   def types

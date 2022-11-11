@@ -3,14 +3,14 @@
 require "garment"
 
 describe Garment do
-  let(:garment) { Garment.new(name: "Пальто", type: "Верхняя одежда", temperature: (-5..10)) }
+  let(:garment) { Garment.new(name: "Пальто", type: "Верхняя одежда", temperature: -5..10) }
 
   describe "#initialize" do
     let(:expected_attributes) do
       {
         name: "Пальто",
         type: "Верхняя одежда",
-        temperature: (-5..10)
+        temperature: -5..10
       }
     end
 
